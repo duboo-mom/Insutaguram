@@ -26,6 +26,10 @@
 						<input type="text" class="form-control" placeholder="아이디" id="loginidInput">
 						<button class="btn btn-primary ml-2" id="duplicateBtn">중복확인</button>			
 					</div>			
+					
+					<div class="small text-info d-none" id="availableId">사용가능한 아이디 입니다.</div>
+					<div class="small text-danger d-none" id="duplicatedId">중복된 아이디 입니다.</div>
+					
 					<input type="password" class="form-control mt-3" placeholder="비밀번호" id="passwordInput">
 					<input type="password" class="form-control mt-3" placeholder="비밀번호 확인" id="passwordConfirm">
 					<input type="text" class="form-control mt-3" placeholder="사용자 이름" id="nameInput">
@@ -44,6 +48,51 @@
 	<script>
 		$(document).ready(function() {
 			
+			var isCheckedId = false;
+			var isDuplicateId = true;
+			
+			$("#loginidInput").on("input", function() {
+				isCheckedId = false;
+				isDuplicateId = true;
+				
+				$("#availableId").addClass("d-none");
+				$("#duplicatedId").addClass("d-none");
+			});
+			
+			$("#duplicateBtn").on("click", function() {
+								
+				let id = $("#loginidInput").val();
+				
+				if(id == "") {
+					alert("아이디를 입력하세요");
+					return;
+				}
+				
+				$.ajax({
+					type:"get"
+					, url:"/user/duplicate_id"
+					, data:{"loginId":id}
+					, success:function(data) {
+						isCheckedId = true;
+						
+						if(data.is_duplicate) {
+							isDuplicateId = true;
+							$("#duplicatedId").removeClass("d-none");
+							$("#availableId").addClass("d-none");
+						} else {
+							isDuplicateId = false;
+							$("#availableId").removeClass("d-none");
+							$("#duplicatedId").addClass("d-none");
+						}
+					}
+					, error:function() {
+						alert("중복체크 에러");
+					}
+					
+				});
+				
+			});
+			
 			$("#joinBtn").on("click", function() {
 				
 				let id = $("#loginidInput").val();
@@ -54,6 +103,19 @@
 				
 				if(id == "") {
 					alert("아이디를 입력하세요");
+					return;
+				}
+				
+				// 중복체크 유효성 검사
+				if(!isCheckedId) {
+					alert("아이디 중복확인을 해주세요");
+					return;
+				}
+				
+				// 아이디 중복여부 유효성 검사
+				// 중복된 상태로 회원가입 버튼을 눌렀을때
+				if(isDuplicateId) {
+					alert("중복된 아이디 입니다");
 					return;
 				}
 				

@@ -19,25 +19,35 @@
 <body>
 	<div id="wrap">
 		<div class="empty-box"></div>
-		<section class="signin-content d-flex align-items-center justify-content-center">
-			<img width="300" height="300" src="https://t1.daumcdn.net/cfile/tistory/99B6AB485D09F2132A">
-			<div class="signin-box ml-5">
-				<div class="signin-input-box text-center">
-					<h2 class="mb-2">Insutaguram</h2>
-					<input type="text" class="form-control mt-2" placeholder="아이디">
-					<input type="text" class="form-control mt-2" placeholder="비밀번호">
-					<button type="button" class="btn btn-primary btn-block mt-2">로그인</button>
-					<hr>
-					<a href="/user/temppw/view" class="text-secondary small">비밀번호를 잊으셨나요?</a>
-				</div>
-				<div class="mt-4 text-center">
-					<div>계정이 없으신가요? <a class="font-weight-bold" href="/user/signup/view">가입하기</a></div>
-				</div>
+		<section class="signin-content d-flex justify-content-center">
+			<div class="d-flex align-items-center">
+				<img height="250" src="https://t1.daumcdn.net/cfile/tistory/99B6AB485D09F2132A">
+				<div class=" ml-5">
+					<div class="signin-input-box text-center">
+						<h2 class="mb-4">Insutaguram</h2>
+						<input type="text" class="form-control mt-2" placeholder="아이디">
+						<input type="text" class="form-control mt-2" placeholder="비밀번호">
+						<button type="button" id="loginBtn" class="btn btn-primary btn-block mt-2">로그인</button>
+						<hr>
+						<a href="/user/temppw/view" class="text-secondary small">비밀번호를 잊으셨나요?</a>
+					</div>
+					<div class="mt-4 text-center box-border">
+						<div class="m-4">계정이 없으신가요? <a class="font-weight-bold" href="/user/signup/view">가입하기</a></div>
+					</div>
+				</div>		
 			</div>
+			
 		
 		</section>
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
 	</div>
+
+	<script>
+		$(document).ready(function() {
+			
+		});
+	
+	</script>
 
 </body>
 </html>

@@ -2,28 +2,10 @@
 
 #wrap {
 	width:1200px;
-	height:800px;
 }
 
 .empty-box {
 	height:100px;
-}
-
-.signin-content {
-	width:600px;
-	height:300px;	
-}
-
-.signin-content > .signin-box {
-	width:500px;
-}
-
-.signin-content > .signin-box >.signin-input-box {
-	
-}
-
-.signup-main {
-	width:360px;
 }
 
 .box-border {

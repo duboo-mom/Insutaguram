@@ -5,19 +5,21 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.duboomom.insutaguram.user.bo.UserBO;
 
 @RestController
+@RequestMapping("/user")
 public class UserRestController {
 
 	@Autowired
 	private UserBO userBO;
 	
 	// 회원가입 api
-	@PostMapping("/user/signup")
+	@PostMapping("/signup")
 	public Map<String, String> signup(
 			@RequestParam("loginId") String loginId
 			, @RequestParam("password") String password
@@ -36,5 +38,7 @@ public class UserRestController {
 		
 		return result;
 	}
+	
+	// 아이디 중복확인 api
 	
 }

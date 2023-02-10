@@ -26,8 +26,8 @@
 						<input type="text" class="form-control" placeholder="아이디" id="loginidInput">
 						<button class="btn btn-primary ml-2" id="duplicateBtn">중복확인</button>			
 					</div>			
-					<input type="text" class="form-control mt-3" placeholder="비밀번호" id="passwordInput">
-					<input type="text" class="form-control mt-3" placeholder="비밀번호 확인" id="passwordConfirm">
+					<input type="password" class="form-control mt-3" placeholder="비밀번호" id="passwordInput">
+					<input type="password" class="form-control mt-3" placeholder="비밀번호 확인" id="passwordConfirm">
 					<input type="text" class="form-control mt-3" placeholder="사용자 이름" id="nameInput">
 					<input type="text" class="form-control mt-3" placeholder="이메일" id="emailInput">
 					<button type="button" class="btn btn-primary btn-block my-5" id="joinBtn">가입하기</button>
@@ -83,7 +83,7 @@
 					, data:{"loginId":id, "password":password, "name":name, "email":email}
 					, success:function(data) {
 						if(data.result == "success") {
-							location.href="/post/timeline/view"
+							location.href="/user/signin/view"
 						} else {
 							alert("회원가입 실패");
 						}

@@ -17,13 +17,13 @@
 	
 </head>
 <body>
-	<div id="wrap">
-		<header>
+	<div class="container">
+
+		<c:import url="/WEB-INF/jsp/include/header.jsp"/>
 		
-		</header>
-		
-		<section>
-		
+		<section class="ml-3">
+			<hr>
+			<h2>탐라인</h2>
 		</section>
 		
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>

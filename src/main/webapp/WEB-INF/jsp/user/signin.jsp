@@ -25,9 +25,11 @@
 				<div class=" ml-5">
 					<div class="signin-input-box text-center">
 						<h2 class="mb-4">Insutaguram</h2>
-						<input type="text" class="form-control mt-2" placeholder="아이디" id="loginIdInput">
-						<input type="text" class="form-control mt-2" placeholder="비밀번호" id="passwordInput">
-						<button type="button" id="loginBtn" class="btn btn-primary btn-block mt-2">로그인</button>
+						<form id="loginForm">
+							<input type="text" class="form-control mt-2" placeholder="아이디" id="loginIdInput">
+							<input type="password" class="form-control mt-2" placeholder="비밀번호" id="passwordInput">
+							<button type="submit" id="loginBtn" class="btn btn-primary btn-block mt-2">로그인</button>
+						</form>
 						<hr>
 						<a href="/user/temppw/view" class="text-secondary small">비밀번호를 잊으셨나요?</a>
 					</div>
@@ -45,18 +47,24 @@
 	<script>
 		$(document).ready(function() {
 			
-			$("#loginBtn").on("click", function() {
+			$("#loginForm").on("submit", function(e) {
+			//로그인 과정에 대한 사용자 편의성 enter 입력으로 로그인 되도록			
+			//$("#loginBtn").on("click", function() {
+				
+				// 해당 이벤트의 기능을 모두 취소한다
+				e.preventDefault();
+				
 				let id = $("#loginIdInput").val();
 				let password = $("#passwordInput").val();
 				
 				if(id == "") {
 					alert("아이디를 입력하세요");
-					return;
+					return false;
 				}
 				
 				if(password == "") {
 					alert("비밀번호를 입력하세요");
-					return;
+					return false;
 				}
 				
 				$.ajax({
@@ -76,7 +84,7 @@
 					
 				});
 					
-					
+				return false;	
 					
 			});
 			

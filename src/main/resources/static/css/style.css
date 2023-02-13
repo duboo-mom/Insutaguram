@@ -4,6 +4,10 @@
 	width:1200px;
 }
 
+header {
+	height:70px;
+}
+
 .empty-box {
 	height:100px;
 }

@@ -25,8 +25,8 @@
 				<div class=" ml-5">
 					<div class="signin-input-box text-center">
 						<h2 class="mb-4">Insutaguram</h2>
-						<input type="text" class="form-control mt-2" placeholder="아이디">
-						<input type="text" class="form-control mt-2" placeholder="비밀번호">
+						<input type="text" class="form-control mt-2" placeholder="아이디" id="loginIdInput">
+						<input type="text" class="form-control mt-2" placeholder="비밀번호" id="passwordInput">
 						<button type="button" id="loginBtn" class="btn btn-primary btn-block mt-2">로그인</button>
 						<hr>
 						<a href="/user/temppw/view" class="text-secondary small">비밀번호를 잊으셨나요?</a>
@@ -44,6 +44,41 @@
 
 	<script>
 		$(document).ready(function() {
+			
+			$("#loginBtn").on("click", function() {
+				let id = $("#loginIdInput").val();
+				let password = $("#passwordInput").val();
+				
+				if(id == "") {
+					alert("아이디를 입력하세요");
+					return;
+				}
+				
+				if(password == "") {
+					alert("비밀번호를 입력하세요");
+					return;
+				}
+				
+				$.ajax({
+					type:"post"
+					, url:"/user/signin"
+					, data:{"loginId":id, "password":password}
+					, success:function(data) {
+						if(data.result == "success") {
+							location.href="/post/timeline/view"
+						} else {
+							alert("아이디와 비밀번호를 확인해주세요");
+						}
+					}
+					, error:function() {
+						alert("로그인 에러");
+					}
+					
+				});
+					
+					
+					
+			});
 			
 		});
 	

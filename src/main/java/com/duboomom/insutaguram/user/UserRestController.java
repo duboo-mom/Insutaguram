@@ -77,6 +77,7 @@ public class UserRestController {
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("userId", user.getId());
+			session.setAttribute("userLoginId", user.getLoginId());
 			session.setAttribute("userName", user.getName());
 						
 		} else {
@@ -86,6 +87,7 @@ public class UserRestController {
 		return result;
 		
 	}
+
 	
 	
 }

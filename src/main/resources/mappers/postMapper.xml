@@ -26,5 +26,18 @@
 		)
 	
 	</insert>
+	
+	<select id="selectPostList" resultType="com.duboomom.insutaguram.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `content`
+			, `location`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+	</select>
 
 </mapper>

@@ -32,4 +32,9 @@ public class UserController {
 		
 	}
 	
+	@GetMapping("/temppw/view")
+	public String temppw() {
+		return "user/temppw";
+	}
+	
 }

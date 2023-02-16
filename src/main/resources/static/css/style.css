@@ -16,12 +16,32 @@ header {
 	width:550px;
 }
 
+.pw-box {
+	width:400px;
+}
+
 .box-border {
 	border: 1px solid #cccccc;
 }
 
 .post-input-box {
 	width:550px;
+}
+
+.upload-icon {
+	font-size:30px;
+}
+
+.cotent-comment-box {
+	width:500px;
+}
+
+.fixed-menu {
+	position:fixed;
+	left:0px;
+	bottom:0px;
+	height:60px;
+	width:100%;
 }
 
 .main-menu {

@@ -27,11 +27,14 @@ public class PostRestController {
 			@RequestParam("content") String content
 			, @RequestParam("location") String location
 			, @RequestParam("file") MultipartFile file
-			, HttpServletRequest request) {
+//			, HttpServletRequest request) {
+			, HttpSession session) {
 		
-		HttpSession session = request.getSession();
+//		HttpSession session = request.getSession();
+//		int userId = (Integer)session.getAttribute("userId");
+		
 		int userId = (Integer)session.getAttribute("userId");
-		
+				
 		Map<String, String> result = new HashMap<>();
 		
 		int count = postBO.addPost(userId, content, location, file);

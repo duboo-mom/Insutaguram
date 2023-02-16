@@ -33,7 +33,8 @@
 				<hr>
 				<textarea id="contentInput" rows="15" class="form-control" placeholder="내용을 입력해주세요"></textarea>
 				<input id="locationInput" type="text" class="form-control my-3" placeholder="위치 추가">
-				<input id="fileInput" type="file">
+				<input id="fileInput" type="file" class="d-none">
+				<div id="imageUploadBtn" class="upload-icon"><i class="bi bi-image"></i></div>
 				<hr>
 			</div>
 		
@@ -44,6 +45,12 @@
 	<script>
 	
 		$(document).ready(function() {
+			
+			$("#imageUploadBtn").on("click", function() {
+				// 파일 인풋을 클릭한 효과
+				$("#fileInput").click();
+			});
+			
 			
 			$("#uploadBtn").on("click", function() {
 				let content = $("#contentInput").val();

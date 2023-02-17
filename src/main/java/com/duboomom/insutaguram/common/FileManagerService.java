@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileManagerService {
 	
+	// public이라 갖다 쓸순 있지만 final 붙여서 수정은 불가능
 	public static final String FILE_UPLOAD_PATH = "D:\\안미정\\springProject\\upload\\images";
 
 	private static Logger logger = LoggerFactory.getLogger(FileManagerService.class);
@@ -37,16 +38,19 @@ public class FileManagerService {
 		}
 		
 		// 파일 저장
+		String filePath = null;		
 		try {
 			byte[] bytes = file.getBytes();
 			
-			String filePath = directoryPath + file.getOriginalFilename();
+			filePath = directoryPath + file.getOriginalFilename();
 			Path path = Paths.get(filePath);
 			Files.write(path, bytes);
 			
 		} catch (IOException e) {
 			
 			e.printStackTrace();
+			
+			logger.error("saveFile : 파일 생성 에러 - " + filePath);
 			
 			return null;
 		}

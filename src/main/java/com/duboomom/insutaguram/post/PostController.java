@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.duboomom.insutaguram.post.bo.PostBO;
-import com.duboomom.insutaguram.post.model.Post;
+import com.duboomom.insutaguram.post.model.PostDetail;
 
 @Controller
 @RequestMapping("/post")
@@ -21,9 +21,10 @@ public class PostController {
 	@GetMapping("/timeline/view")
 	public String timelineView(Model model) {
 		
-		List<Post> postList = postBO.getPostList();
-		
-		model.addAttribute("postList", postList);
+//		List<Post> postList = postBO.getPostList();
+
+		List<PostDetail> postDetailList = postBO.getPostList();
+		model.addAttribute("postList", postDetailList);
 		
 		return "post/timeline";
 	}

@@ -55,5 +55,22 @@
 			`password` = #{password}
 	
 	</select>
+	
+	<select id="selectUserById" resultType="com.duboomom.insutaguram.user.model.User"
+	parameterType="int">
+		SELECT
+			`id`
+			, `loginId`
+			, `password`
+			, `name`
+			, `email`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`user`
+		WHERE
+			`id` = #{id}
+	
+	</select>
 
 </mapper>

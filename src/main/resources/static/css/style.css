@@ -8,6 +8,10 @@ header {
 	height:70px;
 }
 
+.logo {
+	text-decoration:none;
+}
+
 .empty-box {
 	height:100px;
 }

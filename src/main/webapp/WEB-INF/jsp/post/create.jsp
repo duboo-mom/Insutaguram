@@ -55,15 +55,20 @@
 			$("#uploadBtn").on("click", function() {
 				let content = $("#contentInput").val();
 				let locationInput = $("#locationInput").val();
-				let file = $("#fileInput").val();
+				// let file = $("#fileInput").val();
 				
 				if(content == "") {
 					alert("내용을 입력하세요");
 					return;
 				}
 				
-				if(file == "") {
-					alert("사진을 첨부하세요");
+				// if(file == "") {
+				//	alert("사진을 첨부하세요");
+				//	return;
+				// }
+				
+				if($("#fileInput")[0].files.length == 0) {
+					alert("사진을 첨부해주세요");
 					return;
 				}
 				

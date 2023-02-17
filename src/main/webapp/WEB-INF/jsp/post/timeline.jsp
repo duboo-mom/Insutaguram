@@ -33,7 +33,7 @@
 						<div class="d-flex">
 							<img class="rounded-circle" width="50" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg">
 							<div class="ml-2">
-								<span class="font-weight-bold large ml-2">${post.userId }</span>
+								<span class="font-weight-bold large ml-2">${post.userName }</span>
 								<div class="small ml-2">${post.location }</div>						
 							</div>						
 						</div>

@@ -42,7 +42,7 @@
 			<!-- /댓글들 -->
 			
 			<div class="d-flex">
-				<input type="text" class="form-control mt-5" placeholder="mizzong으로 댓글달기">
+				<input type="text" class="form-control mt-5" placeholder="${userName} 으로 댓글달기">
 				<button class="btn btn-primary">게시</button>			
 			</div>
 			

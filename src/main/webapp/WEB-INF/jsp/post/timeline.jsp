@@ -42,8 +42,8 @@
 
 					<img width="550" src="${post.imagePath }">
 					<div class="icons my-2">
-						<i class="bi bi-heart mr-2"></i>
-						<span id="commentBtn"><i class="bi bi-chat mr-2"></i></span> 
+						<i class="bi bi-heart mr-2 like-btn" data-post-id="${post.id }"></i>
+						<a style="text-decoration:none" href="/post/comment/view" class="bi bi-chat mr-2 text-dark" data-post-id="${post.id }"></a>
 						<i class="bi bi-bookmark-plus"></i>
 					</div>
 					<div class="font-weight-bold">
@@ -54,11 +54,16 @@
 					</div>
 					<!-- 댓글 들 -->
 					<div class="comments">
+						<hr>
 						<div>
 							<span class="font-weight-bold">duboo</span> <span>어쩌구저쩌구 내가 머라햇어</span>					
 						</div>
 						<div>
 							<span class="font-weight-bold">kiki</span> <span>떡볶이 맛나보인당</span>					
+						</div>
+						<div class="d-flex mt-2 mb-4">
+							<input type="text" class="form-control" name="${post.id}">
+							<button type="button" class="btn btn-primary ml-2 comment-btn" data-post-id="${post.id }">게시</button>
 						</div>
 					</div>
 					<!-- /댓글 들 -->			
@@ -87,7 +92,56 @@
 	<script>
 		$(document).ready(function() {
 			
-			$("#commentBtn").on("click", function() {
+			
+			$(".like-btn").on("click", function() {
+				
+				// 해당하는 버튼에 대응되는 post id 를 얻어오기
+				let postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"get"
+					, url:"/post/like"
+					, data:{"postId":postId}
+					, success:function(data) {
+						if(data.result == "success") {
+							location.reload();
+						} else {
+							alert("좋아요 실패");
+						}
+					}
+					, error:function() {
+						alert("좋아요 에러");
+					}
+				});
+				
+			});
+			
+			
+			$(".comment-btn").on("click", function() {
+				let id = $(this).data("post-id");
+				
+				let comment = $("input[name=" + id + "]").val();
+				
+				if(comment == "") {
+					alert("댓글 내용을 입력하세요");
+					return;
+				}
+				
+				$.ajax({
+					type:"post"
+					, url:"/post/comment/create"
+					, data:{"postId":id, "content":comment}
+					, success:function(data) {
+						if(data.result == "success") {
+							location.reload();
+						} else {
+							alert("댓글 등록 실패");
+						}
+					}
+					, error:function() {
+						alert("댓글 등록 에러");
+					}
+				});
 				
 			});
 			

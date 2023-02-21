@@ -42,12 +42,13 @@
 
 					<img width="550" src="${post.imagePath }">
 					<div class="icons my-2">
+						${post.like }
 						<i class="bi bi-heart mr-2 like-btn" data-post-id="${post.id }"></i>
 						<a style="text-decoration:none" href="/post/comment/view" class="bi bi-chat mr-2 text-dark" data-post-id="${post.id }"></a>
 						<i class="bi bi-bookmark-plus"></i>
 					</div>
 					<div class="font-weight-bold">
-						좋아요 20개
+						좋아요 ${post.likeCount }개
 					</div>
 					<div class="contents my-2">
 						${post.content }					
@@ -62,7 +63,8 @@
 							<span class="font-weight-bold">kiki</span> <span>떡볶이 맛나보인당</span>					
 						</div>
 						<div class="d-flex mt-2 mb-4">
-							<input type="text" class="form-control" name="${post.id}">
+							<input type="text" class="form-control" id="commentInput${post.id}">
+							<!-- <input type="text" class="form-control" name="${post.id}">  -->
 							<button type="button" class="btn btn-primary ml-2 comment-btn" data-post-id="${post.id }">게시</button>
 						</div>
 					</div>
@@ -118,9 +120,17 @@
 			
 			
 			$(".comment-btn").on("click", function() {
+				
+				// post id, 작성한 댓글 내용
 				let id = $(this).data("post-id");
 				
-				let comment = $("input[name=" + id + "]").val();
+				// 형제 태그들 중에 바로 이전에 있는 태그를 가져오는 prev()
+				// let comment = $(this).prev().val();
+				
+				// 나는 name 속성 사용했는데 선생님 풀이에서는 id로 만듦
+				// id 셀렉터를 문자열 연산으로 완성
+				let comment = $("#commentInput" + id).val();
+				// let comment = $("input[name=" + id + "]").val();
 				
 				if(comment == "") {
 					alert("댓글 내용을 입력하세요");

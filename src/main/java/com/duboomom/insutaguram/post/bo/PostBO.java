@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.duboomom.insutaguram.common.FileManagerService;
+import com.duboomom.insutaguram.post.comment.bo.CommentBO;
+import com.duboomom.insutaguram.post.comment.model.Comment;
 import com.duboomom.insutaguram.post.dao.PostDAO;
+import com.duboomom.insutaguram.post.like.bo.LikeBO;
 import com.duboomom.insutaguram.post.model.Post;
 import com.duboomom.insutaguram.post.model.PostDetail;
 import com.duboomom.insutaguram.user.bo.UserBO;
@@ -23,6 +26,12 @@ public class PostBO {
 	@Autowired
 	private UserBO userBO;
 	
+	@Autowired
+	private LikeBO likeBO;
+	
+	@Autowired
+	private CommentBO commentBO;
+	
 	public int addPost(int userId, String content, String location, MultipartFile file) {
 		
 		String imagePath = FileManagerService.saveFile(userId, file);
@@ -31,7 +40,7 @@ public class PostBO {
 		
 	}
 	
-	public List<PostDetail> getPostList() {
+	public List<PostDetail> getPostList(int userId) {
 		
 		List<Post> postList = postDAO.selectPostList();
 		
@@ -53,6 +62,21 @@ public class PostBO {
 			User user = userBO.getUserById(post.getUserId());
 			postDetail.setUserName(user.getLoginId());
 			
+			// 좋아요 갯수 조회
+			int likeCount = likeBO.countLikeByPostId(post.getId());
+			
+			// 좋아요 여부 조회
+			boolean isLike = likeBO.isLike(post.getId(), userId);
+			postDetail.setLike(isLike);
+			
+			postDetail.setLikeCount(likeCount);
+			
+			
+			
+			// 해당 post에 달린 댓글 조회
+			List<Comment> commentList = commentBO.getCommentByPostId(post.getId());
+								
+			
 			postDetailList.add(postDetail);
 			
 		}
@@ -60,11 +84,6 @@ public class PostBO {
 		return postDetailList;
 		
 	}
-	
-	public int addLike(int userId, int postId) {
-		return postDAO.insertLike(userId, postId);
-	}
-	
 	
 	
 	

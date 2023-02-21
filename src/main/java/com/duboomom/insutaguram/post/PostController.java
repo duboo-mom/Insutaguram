@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.duboomom.insutaguram.post.bo.PostBO;
 import com.duboomom.insutaguram.post.model.PostDetail;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/post")
 public class PostController {
@@ -19,11 +21,14 @@ public class PostController {
 	private PostBO postBO;
 	
 	@GetMapping("/timeline/view")
-	public String timelineView(Model model) {
+	public String timelineView(Model model
+			, HttpSession session) {
 		
 //		List<Post> postList = postBO.getPostList();
 
-		List<PostDetail> postDetailList = postBO.getPostList();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		List<PostDetail> postDetailList = postBO.getPostList(userId);
 		model.addAttribute("postList", postDetailList);
 		
 		return "post/timeline";

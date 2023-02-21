@@ -25,4 +25,20 @@
 	
 	</insert>
 
+	<select id="selectCommentByPostId" resultType="com.duboomom.insutaguram.post.comment.model.Comment"
+	parameterType="int">
+		SELECT
+			`id`
+			, `userId`
+			, `postId`
+			, `content`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`comment`
+		WHERE
+			`postId` = #{postId}
+	
+	</select>
+
 </mapper>

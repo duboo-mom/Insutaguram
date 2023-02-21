@@ -87,6 +87,9 @@ public class UserRestController {
 		return result;
 		
 	}
+	
+	// 임시 비밀번호 발급 api
+	
 
 	
 	

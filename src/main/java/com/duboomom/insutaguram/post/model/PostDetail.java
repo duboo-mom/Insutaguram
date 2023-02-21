@@ -1,5 +1,7 @@
 package com.duboomom.insutaguram.post.model;
 
+import com.duboomom.insutaguram.post.comment.model.Comment;
+
 public class PostDetail {
 
 	private int id;
@@ -8,8 +10,29 @@ public class PostDetail {
 	private String location;
 	private String content;
 	private String imagePath;
+	private int likeCount;
+	private boolean isLike;
+	private Comment comment;
 	
 	
+	public boolean isLike() {
+		return isLike;
+	}
+	public void setLike(boolean isLike) {
+		this.isLike = isLike;
+	}
+	public Comment getComment() {
+		return comment;
+	}
+	public void setComment(Comment comment) {
+		this.comment = comment;
+	}
+	public int getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
 	public int getId() {
 		return id;
 	}

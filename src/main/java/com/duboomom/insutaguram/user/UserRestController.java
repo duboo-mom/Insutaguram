@@ -89,7 +89,11 @@ public class UserRestController {
 	}
 	
 	// 임시 비밀번호 발급 api
-	
+//	public Map<String, String> setTempPassword() {
+//		
+//		
+//		
+//	}
 
 	
 	

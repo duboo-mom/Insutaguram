@@ -37,13 +37,19 @@
 								<div class="small ml-2">${post.location }</div>						
 							</div>						
 						</div>
-						<i class="bi bi-three-dots"></i>
+						<i class="bi bi-three-dots" data-toggle="modal" data-target="#exampleModalCenter"></i>
 					</div>
 
 					<img width="550" src="${post.imagePath }">
 					<div class="icons my-2">
-						${post.like }
-						<i class="bi bi-heart mr-2 like-btn" data-post-id="${post.id }"></i>
+						<c:choose>
+							<c:when test="${post.like }">
+								<i class="bi bi-heart-fill mr-2 text-danger"></i>
+							</c:when>
+							<c:otherwise>
+								<i class="bi bi-heart mr-2 like-btn" data-post-id="${post.id }"></i>						
+							</c:otherwise>
+						</c:choose>
 						<a style="text-decoration:none" href="/post/comment/view" class="bi bi-chat mr-2 text-dark" data-post-id="${post.id }"></a>
 						<i class="bi bi-bookmark-plus"></i>
 					</div>
@@ -56,12 +62,10 @@
 					<!-- 댓글 들 -->
 					<div class="comments">
 						<hr>
-						<div>
-							<span class="font-weight-bold">duboo</span> <span>어쩌구저쩌구 내가 머라햇어</span>					
-						</div>
-						<div>
-							<span class="font-weight-bold">kiki</span> <span>떡볶이 맛나보인당</span>					
-						</div>
+						<c:forEach var="comment" items="${post.commentList }">
+						<div><b class="mr-2">${comment.userName }</b>${comment.content }</div>
+						</c:forEach>	
+						
 						<div class="d-flex mt-2 mb-4">
 							<input type="text" class="form-control" id="commentInput${post.id}">
 							<!-- <input type="text" class="form-control" name="${post.id}">  -->
@@ -75,6 +79,20 @@
 			</div>
 						
 		</section>
+	
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      
+		      <div class="modal-body text-center">
+		        삭제하기
+		      </div>
+		      
+		    </div>
+		  </div>
+		</div>
 		
 		<div class="empty-box"></div>
 		
@@ -90,6 +108,8 @@
 		</div>			
 				
 	</div>
+	
+	<!-- Button trigger modal -->
 
 	<script>
 		$(document).ready(function() {

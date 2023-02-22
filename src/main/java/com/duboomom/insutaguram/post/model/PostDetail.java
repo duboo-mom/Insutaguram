@@ -1,6 +1,9 @@
 package com.duboomom.insutaguram.post.model;
 
+import java.util.List;
+
 import com.duboomom.insutaguram.post.comment.model.Comment;
+import com.duboomom.insutaguram.post.comment.model.CommentDetail;
 
 public class PostDetail {
 
@@ -12,8 +15,7 @@ public class PostDetail {
 	private String imagePath;
 	private int likeCount;
 	private boolean isLike;
-	private Comment comment;
-	
+	private List<CommentDetail> commentList;	
 	
 	public boolean isLike() {
 		return isLike;
@@ -21,11 +23,11 @@ public class PostDetail {
 	public void setLike(boolean isLike) {
 		this.isLike = isLike;
 	}
-	public Comment getComment() {
-		return comment;
+	public List<CommentDetail> getCommentList() {
+		return commentList;
 	}
-	public void setComment(Comment comment) {
-		this.comment = comment;
+	public void setCommentList(List<CommentDetail> commentList) {
+		this.commentList = commentList;
 	}
 	public int getLikeCount() {
 		return likeCount;

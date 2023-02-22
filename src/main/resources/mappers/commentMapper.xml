@@ -25,7 +25,8 @@
 	
 	</insert>
 
-	<select id="selectCommentByPostId" resultType="com.duboomom.insutaguram.post.comment.model.Comment"
+	<select id="selectCommentListByPostId"
+	resultType="com.duboomom.insutaguram.post.comment.model.Comment"
 	parameterType="int">
 		SELECT
 			`id`
@@ -38,7 +39,8 @@
 			`comment`
 		WHERE
 			`postId` = #{postId}
-	
+		ORDER BY
+			`id` DESC	
 	</select>
 
 </mapper>

@@ -25,10 +25,10 @@
 				<h2 class="my-3">Insutaguram</h2>
 				<h6 class="my-5">비밀번호를 잊었나요?</h6>
 				
-				<input type="text" class="form-control mb-3" placeholder="id 입력">
-				<input type="text" class="form-control mb-3" placeholder="email 입력">
+				<input type="text" class="form-control mb-3" placeholder="id 입력" id="loginIdInput">
+				<input type="text" class="form-control mb-3" placeholder="email 입력" id="emailInput">
 				
-				<button type="button" class="btn btn-dark btn-block">임시 비밀번호 발급</button>
+				<button type="button" class="btn btn-dark btn-block" id="setTempPwBtn">임시 비밀번호 발급</button>
 				
 				<input type="text" class="form-control my-4" placeholder="임시 비밀번호">
 				<a href="/user/signin/view">로그인 화면으로</a>
@@ -36,6 +36,31 @@
 		</section>
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
 	</div>
-
+	
+	<script>
+		$(document).ready(function() {
+			
+			$("#setTempPwBtn").on("click", function() {
+				let loginId = $("#loginIdInput").val();
+				let email = $("#emailInput").val();
+				
+				if(loginId == "") {
+					alert("아이디를 입력하세요");
+					return;
+				}
+				
+				if(email == "") {
+					alert("이메일을 입력하세요");
+					return;
+				}
+				
+				
+				
+				
+			});
+			
+		});
+	
+	</script>
 </body>
 </html>

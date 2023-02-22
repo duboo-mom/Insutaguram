@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.duboomom.insutaguram.common.FileManagerService;
 import com.duboomom.insutaguram.post.comment.bo.CommentBO;
-import com.duboomom.insutaguram.post.comment.model.Comment;
+import com.duboomom.insutaguram.post.comment.model.CommentDetail;
 import com.duboomom.insutaguram.post.dao.PostDAO;
 import com.duboomom.insutaguram.post.like.bo.LikeBO;
 import com.duboomom.insutaguram.post.model.Post;
@@ -50,32 +50,25 @@ public class PostBO {
 		for(Post post:postList) {
 			// postDetail 객체를 생성하고, post 객체의 정보를 저장한다.
 			// userName 값을 저장한다.
-			
 			PostDetail postDetail = new PostDetail();
+			User user = userBO.getUserById(post.getUserId());
+			
+			// 좋아요 갯수 조회
+			int likeCount = likeBO.countLikeByPostId(post.getId());			
+			// 좋아요 여부 조회
+			boolean isLike = likeBO.isLike(post.getId(), userId);
+			// 해당 post에 달린 댓글 조회
+			List<CommentDetail> commentList = commentBO.getCommentByPostId(post.getId());
 			
 			postDetail.setId(post.getId());
 			postDetail.setUserId(post.getUserId());
 			postDetail.setLocation(post.getLocation());
 			postDetail.setContent(post.getContent());
-			postDetail.setImagePath(post.getImagePath());
-						
-			User user = userBO.getUserById(post.getUserId());
+			postDetail.setImagePath(post.getImagePath());						
 			postDetail.setUserName(user.getLoginId());
-			
-			// 좋아요 갯수 조회
-			int likeCount = likeBO.countLikeByPostId(post.getId());
-			
-			// 좋아요 여부 조회
-			boolean isLike = likeBO.isLike(post.getId(), userId);
 			postDetail.setLike(isLike);
-			
 			postDetail.setLikeCount(likeCount);
-			
-			
-			
-			// 해당 post에 달린 댓글 조회
-			List<Comment> commentList = commentBO.getCommentByPostId(post.getId());
-								
+			postDetail.setCommentList(commentList);
 			
 			postDetailList.add(postDetail);
 			

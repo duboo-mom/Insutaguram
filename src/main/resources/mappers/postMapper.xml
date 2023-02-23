@@ -42,5 +42,30 @@
 			`id` DESC;
 	</select>
 	
+	<delete id="deletePost" parameterType="int">
+		DELETE FROM
+			`post`
+		WHERE
+			`id` = #{id}
+			AND `userId` = #{userId}
+		
+	</delete>
+
+	<select id="selectPostbyId" parameterType="int"
+	resultType="com.duboomom.insutaguram.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `content`
+			, `location`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			`id` = #{postId}
+	
+	</select>
 
 </mapper>

@@ -78,6 +78,30 @@ public class PostBO {
 		
 	}
 	
+	public int deletePost(int postId, int userId) {
+		
+		Post post = postDAO.selectPostbyId(postId);
+
+		// 로그인한 userId와 postId 에 해당하는 게시글 삭제
+		int count = postDAO.deletePost(postId, userId);
+		
+		if(count == 1) {
+			
+			// imagePath에 있는 파일도 지우기
+			FileManagerService.removeFile(post.getImagePath());
+			
+			// 근데 해당하는 post에 댓글과 좋아요가 없을수도 있음
+			// comment랑 like는 delete 쿼리 수행후 count 0이어도 상관 없음...?
+			// => 없을수도 있고, 많을수도 있어서 count 수가 중요한건 아님!
+			commentBO.deleteCommentByPostId(postId);
+			likeBO.deleteLikeByPostId(postId);		
+			
+		}
+		
+		return count;
+				
+	}
+	
 	
 	
 //	public List<Feed> getPostList() {

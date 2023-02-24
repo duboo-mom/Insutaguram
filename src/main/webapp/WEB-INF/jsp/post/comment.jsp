@@ -19,36 +19,88 @@
 </head>
 <body>
 	<div class="container">
-		<div class="cotent-comment-box">
-			<div class="my-3">
-				<h4 class="text-center">댓글</h4>			
+		<div class="d-flex justify-content-center">
+		
+			<div width="550" class="cotent-comment-box">
+				<div class="my-3">
+					<h4 class="text-center">댓글</h4>			
+				</div>
+				<hr>
+				<div class="post-content d-flex">
+					<img class="rounded-circle" width="50" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg">
+					<div class="small ml-4 mt-2 mb-2">
+						<div class="font-weight-bold large">${postDetail.userName }</div>
+						<div>${postDetail.content }</div>
+					</div>				
+				</div>
+				<hr>
+				<!-- 댓글들 -->
+				<c:forEach var="comment" items="${postDetail.commentList }">
+				<div>
+					<span class="font-weight-bold">${comment.userName }</span> <span>${comment.content }</span>					
+				</div>
+				</c:forEach>
+				<!-- /댓글들 -->
+				
+				<div class="d-flex mt-2 mb-4">
+					<input type="text" class="form-control" id="commentInput${postDetail.id }" placeholder="${userLoginId } 로 댓글 달기 ">
+					<button type="button" class="btn btn-primary ml-2 comment-btn" data-post-id="${postDetail.id }">게시</button>
+				</div>
+				
 			</div>
-			<hr>
-			<div class="post-content d-flex">
-				<img class="rounded-circle" width="50" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg">
-				<div class="small ml-4 mt-2 mb-2">
-					<div class="font-weight-bold large">mizzong</div>
-					<div>어ㅉㅓ구 저쩌구...</div>
-				</div>				
-			</div>
-			<hr>
-			<!-- 댓글들 -->
-			<div>
-				<span class="font-weight-bold">duboo</span> <span>어쩌구저쩌구 내가 머라햇어</span>					
-			</div>
-			<div>
-				<span class="font-weight-bold">kiki</span> <span>떡볶이 맛나보인당</span>					
-			</div>
-			<!-- /댓글들 -->
+			<div class="empty-box"></div>
 			
-			<div class="d-flex">
-				<input type="text" class="form-control mt-5" placeholder="${userName} 으로 댓글달기">
-				<button class="btn btn-primary">게시</button>			
-			</div>
-			
+			<div class="fixed-menu bg-white d-flex justify-content-center">
+				<nav class="main-menu box-border mt-4">
+					<ul class="nav nav-fill">
+						<li class="nav-item"><a class="nav-link text-dark" href="/post/timeline/view"><i class="bi bi-house"></i></a></li>
+						<li class="nav-item"><a class="nav-link text-dark" href="#"><i class="bi bi-search"></i></a></li>
+						<li class="nav-item"><a class="nav-link text-dark" href="/post/create/view"><i class="bi bi-pencil-square"></i></a></li>
+						<li class="nav-item"><a class="nav-link text-dark" href="/post/mypost/view"><i class="bi bi-person-circle"></i></a></li>
+					</ul>		
+				</nav>
+			</div>			
+		
 		</div>
-	
+						
 	</div>
-
+	
+	<script>
+		$(document).ready(function() {
+			
+			$(".comment-btn").on("click", function() {
+				
+				// post id, 작성한 댓글 내용
+				let id = $(this).data("post-id");
+				
+				// id 셀렉터를 문자열 연산으로 완성
+				let comment = $("#commentInput" + id).val();
+				
+				if(comment == "") {
+					alert("댓글 내용을 입력하세요");
+					return;
+				}
+				
+				$.ajax({
+					type:"post"
+					, url:"/post/comment/create"
+					, data:{"postId":id, "content":comment}
+					, success:function(data) {
+						if(data.result == "success") {
+							location.reload();
+						} else {
+							alert("댓글 등록 실패");
+						}
+					}
+					, error:function() {
+						alert("댓글 등록 에러");
+					}
+				});
+				
+			});
+			
+		});
+	
+	</script>
 </body>
 </html>

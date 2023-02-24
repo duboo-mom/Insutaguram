@@ -53,7 +53,7 @@
 								<i class="bi bi-heart mr-2 like-btn" data-post-id="${post.id }"></i>						
 							</c:otherwise>
 						</c:choose>
-						<a style="text-decoration:none" href="/post/comment/view" class="bi bi-chat mr-2 text-dark" data-post-id="${post.id }"></a>
+						<a style="text-decoration:none" href="/post/comment/view?postId=${post.id }" class="bi bi-chat mr-2 text-dark chat-btn"></i></a>
 						<i class="bi bi-bookmark-plus"></i>
 					</div>
 					<c:if test="${post.likeCount != 0}">
@@ -118,6 +118,7 @@
 
 	<script>
 		$(document).ready(function() {
+		
 			
 			$(".more-btn").on("click", function() {
 				// 해당 more-btn 태그에 있는 post-id를 모달의 a태그에 넣는다.

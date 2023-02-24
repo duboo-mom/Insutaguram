@@ -78,6 +78,29 @@ public class PostBO {
 		
 	}
 	
+	public PostDetail getPostDetailById(int postId) {
+		
+		Post post = postDAO.selectPostbyId(postId);
+		
+		PostDetail postDetail = new PostDetail();
+		User user = userBO.getUserById(post.getUserId());
+				
+		// 해당 post에 달린 댓글 조회
+		List<CommentDetail> commentList = commentBO.getCommentByPostId(post.getId());
+		
+		postDetail.setId(post.getId());
+		postDetail.setUserId(post.getUserId());
+		postDetail.setLocation(post.getLocation());
+		postDetail.setContent(post.getContent());
+		postDetail.setImagePath(post.getImagePath());						
+		postDetail.setUserName(user.getLoginId());
+
+		postDetail.setCommentList(commentList);
+		
+		return postDetail;
+		
+	}
+	
 	public int deletePost(int postId, int userId) {
 		
 		Post post = postDAO.selectPostbyId(postId);
@@ -100,6 +123,49 @@ public class PostBO {
 		
 		return count;
 				
+	}
+	
+	public List<PostDetail> getMyPostList(int userId) {
+		
+		List<Post> postList = postDAO.selectPostList();
+		
+		List<PostDetail> postDetailList = new ArrayList<>();
+		
+		for(Post post:postList) {
+			
+			// post의 userId가 입력받은 userId와 일치한 값만 가져오기
+			if(post.getUserId() == userId) {
+				// postDetail 객체를 생성하고, post 객체의 정보를 저장한다.
+				// userName 값을 저장한다.
+				PostDetail postDetail = new PostDetail();
+				User user = userBO.getUserById(post.getUserId());
+				
+				// 좋아요 갯수 조회
+				int likeCount = likeBO.countLikeByPostId(post.getId());			
+				// 좋아요 여부 조회
+				boolean isLike = likeBO.isLike(post.getId(), userId);
+				// 해당 post에 달린 댓글 조회
+				List<CommentDetail> commentList = commentBO.getCommentByPostId(post.getId());
+				
+				postDetail.setId(post.getId());
+				postDetail.setUserId(post.getUserId());
+				postDetail.setLocation(post.getLocation());
+				postDetail.setContent(post.getContent());
+				postDetail.setImagePath(post.getImagePath());						
+				postDetail.setUserName(user.getLoginId());
+				postDetail.setLike(isLike);
+				postDetail.setLikeCount(likeCount);
+				postDetail.setCommentList(commentList);
+				
+				postDetailList.add(postDetail);				
+				
+			}
+						
+		}
+		
+		return postDetailList;
+		
+		
 	}
 	
 	
